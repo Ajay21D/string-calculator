@@ -1,5 +1,9 @@
 package org.example;
 
+import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class StringCal {
 
     // Method to add numbers
@@ -10,45 +14,45 @@ public class StringCal {
 
         String delimiter = ",|\n";
 
+        // Check for custom delimiter
         if (numbers.startsWith("//")) {
             String[] parts = numbers.split("\n", 2);
-            delimiter = extractDelimiter(parts[0]);  // Here try to Extract the custom delimiter
+            delimiter = extractDelimiter(parts[0]);
             numbers = parts[1];
         }
 
-        System.out.println("Delimiter: " + delimiter);
+        System.out.println("Delimiter: " + delimiter);  // Print the delimiter
 
         String[] numberArray = numbers.split(delimiter);
 
-        int sum = 0;
-        for (String number : numberArray) {
 
-            if (!number.isEmpty()) {
-                sum += Integer.parseInt(number);
-            }
+        List<Integer> numList = Arrays.stream(numberArray)
+                .filter(n -> !n.isEmpty())
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+
+        List<Integer> negatives = numList.stream()
+                .filter(n -> n < 0)
+                .collect(Collectors.toList());
+
+
+        if (!negatives.isEmpty()) {
+            throw new IllegalArgumentException("Negative numbers not allowed: " + negatives);
         }
 
-        return sum;
+        // Calculate the total sum using Streams
+        return numList.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
-
+    // Method to extract the custom delimiter from the first line
     private String extractDelimiter(String firstLine) {
         if (firstLine.startsWith("//")) {
-            return firstLine.substring(2);  // The delimiter follows "//"
+            return firstLine.substring(2);
         }
         return ",";
     }
 
-    public static void main(String[] args) {
-        StringCal calculator = new StringCal();
-
-        System.out.println(" : TDD Assessment :");
-        System.out.println("OutPut are as Follow :");
-
-        // Test case to see the results
-        System.out.println(calculator.add("1,2,3"));
-        System.out.println(calculator.add("//;\n1;2;3"));
-        System.out.println(calculator.add(""));
-        System.out.println(calculator.add("1\n2\n3"));
-    }
 }

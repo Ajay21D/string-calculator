@@ -56,10 +56,17 @@ public class StringCalTest {
             calculator.add("//;\n-1;2;3");
         });
     }
+    @Test
+    void testSingleNegativeNumber() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculator.add("-5");
+        });
+    }
+
 
     @Test
-    void testEmptyNumbersBetweenDelimiters() {
-        assertEquals(3, calculator.add("1,,2"));
+    void testMultipleDelimitersWithEmptyNumbers() {
+        assertEquals(0, calculator.add("1,,2,,3"));
     }
 
 
