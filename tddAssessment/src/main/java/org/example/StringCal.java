@@ -39,7 +39,7 @@ public class StringCal {
 
 
         if (!negatives.isEmpty()) {
-            throw new IllegalArgumentException("Negative numbers not allowed: " + negatives);
+            throw new NumberFormatException("Negative numbers not allowed: " + negatives);
         }
 
         // Calculate the total sum using Streams
