@@ -1,6 +1,5 @@
 package org.example;
 
-
 public class StringCal {
 
 
@@ -8,6 +7,18 @@ public class StringCal {
         if (numbers.isEmpty()) {
             return 0;
         }
+        String delimiter = ",|\n";
+
+
+        if (numbers.startsWith("//")) {
+            String[] parts = numbers.split("\n", 2);
+            numbers = parts[1];
+        }
+
+        System.out.println("Delimiter: " + delimiter);
+
+
+
         return Integer.parseInt(numbers);
     }
 
@@ -17,7 +28,7 @@ public class StringCal {
 
         System.out.println(" : TDD Assessment :");
         System.out.println("OutPut are as Follow :");
-        System.out.println(calculator.add("2"));
+        System.out.println(calculator.add("-4"));
 
     }
 }
