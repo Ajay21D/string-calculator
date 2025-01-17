@@ -75,7 +75,7 @@ public class StringCalTest {
 
     @Test
     void testMultipleDelimitersWithEmptyNumbers() {
-        assertEquals(0, calculator.add("1,,2,,3"));
+        assertEquals(6, calculator.add("1,,2,,3"));
     }
 
 
