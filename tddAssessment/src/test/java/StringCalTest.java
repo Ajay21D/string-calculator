@@ -62,6 +62,15 @@ public class StringCalTest {
             calculator.add("-5");
         });
     }
+    @Test
+    void testEmptyNumbersBetweenDelimiters() {
+        assertEquals(3, calculator.add("1,,2"));
+    }
+
+    @Test
+    void testCustomDelimiterWithEmptyString() {
+        assertEquals(0, calculator.add("//;\n"));
+    }
 
 
     @Test
