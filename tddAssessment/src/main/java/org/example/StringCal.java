@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.*;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringCal {
@@ -50,7 +51,7 @@ public class StringCal {
     // Method to extract the custom delimiter from the first line
     private String extractDelimiter(String firstLine) {
         if (firstLine.startsWith("//")) {
-            return firstLine.substring(2);
+            return Pattern.quote(firstLine.substring(2));
         }
         return ",";
     }
